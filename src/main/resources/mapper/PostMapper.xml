@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icms.mapper.PostMapper">
+	<resultMap id="BaseResultMap" type="com.icms.model.Post">
+		<id column="pid" jdbcType="INTEGER" property="pid" />
+		<result column="cid" jdbcType="INTEGER" property="cid" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="deleted" jdbcType="BIT" property="deleted" />
+		<result column="type" jdbcType="TINYINT" property="type" />
+		<result column="status" jdbcType="TINYINT" property="status" />
+		<result column="created" jdbcType="TIMESTAMP" property="created" />
+		<result column="creator" jdbcType="INTEGER" property="creator" />
+		<result column="updated" jdbcType="TIMESTAMP" property="updated" />
+		<result column="editor" jdbcType="INTEGER" property="editor" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.icms.model.Post">
+		<result column="content" jdbcType="LONGVARCHAR" property="content" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		pid, cid, title, deleted, type, status, created, creator, updated, editor
+	</sql>
+	<sql id="Blob_Column_List">
+		content
+	</sql>
+	<sql id="findByParamsCommon">
+		from post p where 1=1
+		<if test="cid != null">
+			and p.cid = #{cid}
+		</if>
+		<if test="deleted != null">
+			and p.deleted = #{deleted}
+		</if>
+		<if test="type != null">
+			and p.type = #{type}
+		</if>
+		<if test="status != null">
+			and p.status = #{status}
+		</if>
+		<if test="title != null">
+			and p.title = #{title}
+		</if>
+	</sql>
+	<select id="findByParams" parameterType="com.icms.model.Post"
+		resultMap="BaseResultMap">
+		select p.*
+		<include refid="findByParamsCommon" />
+		<!-- <if test="start != null and size != null and page != null and page 
+			> 0 and start > -1"> limit #{start}, #{size} </if> -->
+	</select>
+	<select id="countByParams" parameterType="com.icms.model.Post"
+		resultType="Integer">
+		select count(*)
+		<include refid="findByParamsCommon" />
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from post
+		where pid = #{pid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from post
+		where pid = #{pid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.icms.model.Post">
+		insert into post (pid, cid, title,
+		deleted, type, status,
+		created, creator, updated,
+		editor, content)
+		values (#{pid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER},
+		#{title,jdbcType=VARCHAR},
+		#{deleted,jdbcType=BIT}, #{type,jdbcType=TINYINT}, #{status,jdbcType=TINYINT},
+		#{created,jdbcType=TIMESTAMP}, #{creator,jdbcType=INTEGER},
+		#{updated,jdbcType=TIMESTAMP},
+		#{editor,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.icms.model.Post">
+		insert into post
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pid != null">
+				pid,
+			</if>
+			<if test="cid != null">
+				cid,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="deleted != null">
+				deleted,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="created != null">
+				created,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+			<if test="updated != null">
+				updated,
+			</if>
+			<if test="editor != null">
+				editor,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="pid != null">
+				#{pid,jdbcType=INTEGER},
+			</if>
+			<if test="cid != null">
+				#{cid,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="deleted != null">
+				#{deleted,jdbcType=BIT},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=TINYINT},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=TINYINT},
+			</if>
+			<if test="created != null">
+				#{created,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=INTEGER},
+			</if>
+			<if test="updated != null">
+				#{updated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="editor != null">
+				#{editor,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.icms.model.Post">
+		update post
+		<set>
+			<if test="cid != null">
+				cid = #{cid,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="deleted != null">
+				deleted = #{deleted,jdbcType=BIT},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=TINYINT},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=TINYINT},
+			</if>
+			<if test="created != null">
+				created = #{created,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				creator = #{creator,jdbcType=INTEGER},
+			</if>
+			<if test="updated != null">
+				updated = #{updated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="editor != null">
+				editor = #{editor,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where pid = #{pid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.icms.model.Post">
+		update post
+		set cid = #{cid,jdbcType=INTEGER},
+		title = #{title,jdbcType=VARCHAR},
+		deleted = #{deleted,jdbcType=BIT},
+		type = #{type,jdbcType=TINYINT},
+		status = #{status,jdbcType=TINYINT},
+		created = #{created,jdbcType=TIMESTAMP},
+		creator = #{creator,jdbcType=INTEGER},
+		updated = #{updated,jdbcType=TIMESTAMP},
+		editor = #{editor,jdbcType=INTEGER},
+		content = #{content,jdbcType=LONGVARCHAR}
+		where pid = #{pid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.icms.model.Post">
+		update post
+		set cid = #{cid,jdbcType=INTEGER},
+		title = #{title,jdbcType=VARCHAR},
+		deleted = #{deleted,jdbcType=BIT},
+		type = #{type,jdbcType=TINYINT},
+		status = #{status,jdbcType=TINYINT},
+		created = #{created,jdbcType=TIMESTAMP},
+		creator = #{creator,jdbcType=INTEGER},
+		updated = #{updated,jdbcType=TIMESTAMP},
+		editor = #{editor,jdbcType=INTEGER}
+		where pid = #{pid,jdbcType=INTEGER}
+	</update>
+	<resultMap id="BaseResultMap" type="com.icms.model.Post">
+		<id column="pid" jdbcType="INTEGER" property="pid" />
+		<result column="cid" jdbcType="INTEGER" property="cid" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="deleted" jdbcType="BIT" property="deleted" />
+		<result column="status" jdbcType="TINYINT" property="status" />
+		<result column="created" jdbcType="TIMESTAMP" property="created" />
+		<result column="creator" jdbcType="INTEGER" property="creator" />
+		<result column="updated" jdbcType="TIMESTAMP" property="updated" />
+		<result column="editor" jdbcType="INTEGER" property="editor" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.icms.model.Post">
+		<result column="content" jdbcType="LONGVARCHAR" property="content" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		pid, cid, title, deleted, status, created, creator, updated, editor
+	</sql>
+	<sql id="Blob_Column_List">
+		content
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from post
+		where pid = #{pid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from post
+		where pid = #{pid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.icms.model.Post">
+		insert into post (pid, cid, title,
+		deleted, status, created,
+		creator, updated, editor,
+		content)
+		values (#{pid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER},
+		#{title,jdbcType=VARCHAR},
+		#{deleted,jdbcType=BIT}, #{status,jdbcType=TINYINT}, #{created,jdbcType=TIMESTAMP},
+		#{creator,jdbcType=INTEGER}, #{updated,jdbcType=TIMESTAMP},
+		#{editor,jdbcType=INTEGER},
+		#{content,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.icms.model.Post">
+		insert into post
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pid != null">
+				pid,
+			</if>
+			<if test="cid != null">
+				cid,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="deleted != null">
+				deleted,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="created != null">
+				created,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+			<if test="updated != null">
+				updated,
+			</if>
+			<if test="editor != null">
+				editor,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="pid != null">
+				#{pid,jdbcType=INTEGER},
+			</if>
+			<if test="cid != null">
+				#{cid,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="deleted != null">
+				#{deleted,jdbcType=BIT},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=TINYINT},
+			</if>
+			<if test="created != null">
+				#{created,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=INTEGER},
+			</if>
+			<if test="updated != null">
+				#{updated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="editor != null">
+				#{editor,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.icms.model.Post">
+		update post
+		<set>
+			<if test="cid != null">
+				cid = #{cid,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="deleted != null">
+				deleted = #{deleted,jdbcType=BIT},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=TINYINT},
+			</if>
+			<if test="created != null">
+				created = #{created,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				creator = #{creator,jdbcType=INTEGER},
+			</if>
+			<if test="updated != null">
+				updated = #{updated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="editor != null">
+				editor = #{editor,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where pid = #{pid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.icms.model.Post">
+		update post
+		set cid = #{cid,jdbcType=INTEGER},
+		title = #{title,jdbcType=VARCHAR},
+		deleted = #{deleted,jdbcType=BIT},
+		status = #{status,jdbcType=TINYINT},
+		created = #{created,jdbcType=TIMESTAMP},
+		creator = #{creator,jdbcType=INTEGER},
+		updated = #{updated,jdbcType=TIMESTAMP},
+		editor = #{editor,jdbcType=INTEGER},
+		content = #{content,jdbcType=LONGVARCHAR}
+		where pid = #{pid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.icms.model.Post">
+		update post
+		set cid = #{cid,jdbcType=INTEGER},
+		title = #{title,jdbcType=VARCHAR},
+		deleted = #{deleted,jdbcType=BIT},
+		status = #{status,jdbcType=TINYINT},
+		created = #{created,jdbcType=TIMESTAMP},
+		creator = #{creator,jdbcType=INTEGER},
+		updated = #{updated,jdbcType=TIMESTAMP},
+		editor = #{editor,jdbcType=INTEGER}
+		where pid = #{pid,jdbcType=INTEGER}
+	</update>
+	<resultMap id="BaseResultMap" type="com.icms.model.Post">
+		<id column="pid" jdbcType="INTEGER" property="pid" />
+		<result column="cid" jdbcType="INTEGER" property="cid" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="deleted" jdbcType="BIT" property="deleted" />
+		<result column="status" jdbcType="TINYINT" property="status" />
+		<result column="created" jdbcType="TIMESTAMP" property="created" />
+		<result column="creator" jdbcType="INTEGER" property="creator" />
+		<result column="updated" jdbcType="TIMESTAMP" property="updated" />
+		<result column="editor" jdbcType="INTEGER" property="editor" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.icms.model.Post">
+		<result column="content" jdbcType="LONGVARCHAR" property="content" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		pid, cid, title, deleted, status, created, creator, updated, editor
+	</sql>
+	<sql id="Blob_Column_List">
+		content
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from post
+		where pid = #{pid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from post
+		where pid = #{pid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.icms.model.Post">
+		insert into post (pid, cid, title,
+		deleted, status, created,
+		creator, updated, editor,
+		content)
+		values (#{pid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER},
+		#{title,jdbcType=VARCHAR},
+		#{deleted,jdbcType=BIT}, #{status,jdbcType=TINYINT}, #{created,jdbcType=TIMESTAMP},
+		#{creator,jdbcType=INTEGER}, #{updated,jdbcType=TIMESTAMP},
+		#{editor,jdbcType=INTEGER},
+		#{content,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.icms.model.Post">
+		insert into post
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pid != null">
+				pid,
+			</if>
+			<if test="cid != null">
+				cid,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="deleted != null">
+				deleted,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="created != null">
+				created,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+			<if test="updated != null">
+				updated,
+			</if>
+			<if test="editor != null">
+				editor,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="pid != null">
+				#{pid,jdbcType=INTEGER},
+			</if>
+			<if test="cid != null">
+				#{cid,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="deleted != null">
+				#{deleted,jdbcType=BIT},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=TINYINT},
+			</if>
+			<if test="created != null">
+				#{created,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=INTEGER},
+			</if>
+			<if test="updated != null">
+				#{updated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="editor != null">
+				#{editor,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.icms.model.Post">
+		update post
+		<set>
+			<if test="cid != null">
+				cid = #{cid,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="deleted != null">
+				deleted = #{deleted,jdbcType=BIT},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=TINYINT},
+			</if>
+			<if test="created != null">
+				created = #{created,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				creator = #{creator,jdbcType=INTEGER},
+			</if>
+			<if test="updated != null">
+				updated = #{updated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="editor != null">
+				editor = #{editor,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where pid = #{pid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.icms.model.Post">
+		update post
+		set cid = #{cid,jdbcType=INTEGER},
+		title = #{title,jdbcType=VARCHAR},
+		deleted = #{deleted,jdbcType=BIT},
+		status = #{status,jdbcType=TINYINT},
+		created = #{created,jdbcType=TIMESTAMP},
+		creator = #{creator,jdbcType=INTEGER},
+		updated = #{updated,jdbcType=TIMESTAMP},
+		editor = #{editor,jdbcType=INTEGER},
+		content = #{content,jdbcType=LONGVARCHAR}
+		where pid = #{pid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.icms.model.Post">
+		update post
+		set cid = #{cid,jdbcType=INTEGER},
+		title = #{title,jdbcType=VARCHAR},
+		deleted = #{deleted,jdbcType=BIT},
+		status = #{status,jdbcType=TINYINT},
+		created = #{created,jdbcType=TIMESTAMP},
+		creator = #{creator,jdbcType=INTEGER},
+		updated = #{updated,jdbcType=TIMESTAMP},
+		editor = #{editor,jdbcType=INTEGER}
+		where pid = #{pid,jdbcType=INTEGER}
+	</update>
+</mapper>

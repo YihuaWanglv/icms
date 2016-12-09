@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+  </head>
+  <body ng-app="admin">
+    <div id="header"></div>
+    <div class="nav-right-holder"></div>
+    <div class="container" ng-controller="ItemController">
+      <div class="page-header">
+        <h1>Item to be tested</h1>
+      </div>
+      <div class="alert alert-info" role="alert" ng-hide="items &amp;&amp; items.length > 0">
+        There are no item to test yet.
+      </div>
+      <form class="form-horizontal" role="form">
+        <div class="form-group" ng-repeat="item in items">
+          <div class="col-xs-9">
+            <label>
+              <input type="text" class="form-control" ng-model="item.name" ng-if="item.editting"/><span ng-if="!item.editting">{{item.name}}</span>
+            </label>
+          </div>
+          <div class="col-xs-3">
+            <button class="pull-right btn btn-primary" type="button" title="下一级" ng-click="listNext(item);">
+              <span class="glyphicon glyphicon-edit"></span>
+            </button>
+            <a href="/view/admin/point-list.html?iid={{item.iid}}" class="pull-right btn btn-success">查看points</a>
+          </div>
+
+        </div>
+        
+      </form>
+    </div>
+    <!-- <footer class="footer text-center"><p>&copy; 2016 TimeItem, Inc.</p></footer> -->
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="/bower_components/lodash/dist/lodash.min.js"></script>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/app/common/page-layout-init.js"></script>
+    <script type="text/javascript" src="/app/admin/admin.js"></script>
+    <script type="text/javascript" src="/app/admin/controllers.js"></script>
+    <script type="text/javascript" src="/app/admin/services.js"></script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+  </head>
+  <body ng-app="admin">
+    <div id="header"></div>
+    <div class="nav-right-holder"></div>
+    <div class="container" ng-controller="PointController">
+      <div class="page-header">
+        <h1>Points to be tested</h1>
+        
+      </div>
+      <div class="alert alert-info" role="alert" ng-hide="points &amp;&amp; points.length > 0">
+        There are no points yet.
+      </div>
+      <form class="form-horizontal" role="form" ng-submit="addPoint(newPoint)">
+        <div class="form-group">
+          <div class="col-sm-9">
+            <input type="text" class="form-control" ng-model="newTitle" placeholder="New point title..." />
+          </div>
+          <div class="col-sm-3">
+            <input type="number" class="form-control" ng-model="newScores" placeholder="scores" />
+          </div>
+          
+        </div>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <textarea placeholder="New point description..." class="form-control" style="height: 200px;" ng-model="newDescription"></textarea>
+          </div>
+          
+        </div>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <span class="input-group-btn">
+              <button class="btn btn-primary pull-right" type="submit" ng-disabled="!newTitle" title="Add">
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </span>
+          </div>
+          
+        </div>
+        <hr />
+        <div ng-repeat="point in points">
+          <div class="form-group">
+            <div class="col-sm-6">
+              <input type="text" class="form-control" ng-model="point.title" ng-if="point.editting"/><span ng-if="!point.editting">{{point.title}}</span>
+            </div>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" ng-model="point.scores" ng-if="point.editting"/><span ng-if="!point.editting">{{point.scores}}</span>
+            </div>
+            <div class="col-sm-3">
+              <button class="pull-right btn btn-success" type="button" title="Update" ng-if="point.editting" ng-click="changeButtonFlag(point);updatePoint(point)">
+                <span class="glyphicon glyphicon-ok"></span>
+              </button>
+              <button class="pull-right btn btn-primary" type="button" title="Edit" ng-if="!point.editting" ng-click="changeButtonFlag(point);">
+                <span class="glyphicon glyphicon-edit"></span>
+              </button>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <textarea placeholder="You can enter your results or outcomes here..." class="form-control" ng-if="point.editting" style="height: 200px;" ng-model="point.description"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12"><a href="/answer.html" ng-if="point.editting">TextArea已经满足不了我，我要图文并茂大书特书</a></div>
+          </div>
+        </div>
+        
+      </form>
+    </div>
+    <!-- <footer class="footer text-center"><p>&copy; 2016 TimeItem, Inc.</p></footer> -->
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="/bower_components/lodash/dist/lodash.min.js"></script>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/app/common/page-layout-init.js"></script>
+    <script type="text/javascript" src="/app/admin/admin.js"></script>
+    <script type="text/javascript" src="/app/admin/controllers.js"></script>
+    <script type="text/javascript" src="/app/admin/services.js"></script>
+  </body>
+</html>
