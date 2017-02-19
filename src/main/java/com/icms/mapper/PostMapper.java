@@ -3,6 +3,7 @@ package com.icms.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.icms.model.Post;
 
@@ -21,4 +22,8 @@ public interface PostMapper {
     int updateByPrimaryKey(Post record);
     
     List<Post> findByParams(Post point);
+    
+    List<Post> findByIds(List<Integer> ids);
+    
+    List<Post> loadRecentPosts(@Param("cid")Integer cid, @Param("count")Integer count);
 }

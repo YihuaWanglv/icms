@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+  </head>
+  <body ng-app="post">
+    <div id="header"></div>
+    <div class="nav-right-holder"></div>
+    <div class="container" ng-controller="PostListController">
+      <div class="page-header">
+        <h1>文章列表</h1>
+      </div>
+      <div class="alert alert-info" role="alert" ng-hide="posts &amp;&amp; posts.length > 0">
+        There are no posts yet.
+      </div>
+      <form class="form-horizontal" role="form">
+        <a href="/view/admin/post.html?command=0&cid={{cid}}" target="_self">添加文章</a>
+        <a href="/view/admin/post.html?command=0&cid={{cid}}" target="_self" class="pull-right btn btn-success">添加文章</a>
+        <hr />
+        <div ng-repeat="post in posts">
+          <div class="form-group">
+            <div class="col-sm-1">
+              <span>{{post.cid}}</span>
+            </div>
+            <div class="col-sm-9">
+              <span>{{post.title}}</span>
+            </div>
+            <div class="col-sm-2">
+              <a href="/view/admin/post.html?command=1&pid={{post.pid}}" target="_self">查看</a>
+              <a href="/view/admin/post.html?command=2&pid={{post.pid}}" target="_self">编辑</a>
+              <button class="pull-right btn btn-danger" type="button" title="删除" ng-click="deletePost(post);">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+      </form>
+    </div>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/app/common/page-layout-init.js"></script>
+    <script type="text/javascript" src="/app/admin/post/post-list.js"></script>
+    <script type="text/javascript" src="/app/admin/post/controllers-post-list.js"></script>
+    <script type="text/javascript" src="/app/admin/post/services.js"></script>
+  </body>
+</html>

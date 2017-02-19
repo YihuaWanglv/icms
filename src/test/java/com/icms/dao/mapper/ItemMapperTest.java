@@ -14,7 +14,7 @@ import com.icms.model.Category;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(App.class)
+@SpringApplicationConfiguration(classes = App.class)
 public class ItemMapperTest {
 
 	@Autowired CategoryMapper itemMapper;

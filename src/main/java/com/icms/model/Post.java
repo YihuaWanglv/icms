@@ -30,6 +30,8 @@ public class Post {
 	private Date created;
 	@Column
 	private Date updated;
+	@Column
+	private Integer deleted;
 	
 	public Integer getPid() {
 		return pid;
@@ -91,8 +93,12 @@ public class Post {
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-	
-
+	public Integer getDeleted() {
+		return deleted;
+	}
+	public void setDeleted(Integer deleted) {
+		this.deleted = deleted;
+	}
     
     
     

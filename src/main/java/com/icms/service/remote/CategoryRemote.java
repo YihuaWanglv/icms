@@ -14,4 +14,6 @@ public interface CategoryRemote {
 	List<Category> getListByParentId(Integer id);
 	
 	List<Category> findByParams(Category item);
+	
+	void delete(Integer id);
 }

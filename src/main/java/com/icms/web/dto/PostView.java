@@ -6,6 +6,7 @@ public class PostView extends Post {
 
 	private boolean editting = false;
 	private String detail;
+	private String categoryName;
 
 	public boolean getEditting() {
 		return editting;
@@ -21,6 +22,14 @@ public class PostView extends Post {
 
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+	
+	public String getCategoryName() {
+		return categoryName;
+	}
+	
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 }

@@ -13,7 +13,7 @@ import com.icms.model.Category;
 import com.icms.repository.CategoryRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(App.class)
+@SpringApplicationConfiguration(classes = App.class)
 public class ItemRepoTest {
 
 	@Autowired CategoryRepository itemRepository;

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+  </head>
+  <body ng-app="admin">
+    <div id="header"></div>
+    <div class="nav-right-holder"></div>
+    <div class="container" ng-controller="PostController">
+      <div class="page-header">
+        <h1>文章详情</h1>
+      </div>
+      <form class="form-horizontal" role="form" ng-submit="answer(post)">
+        <div class="form-group">
+          <div class="col-sm-12">
+            <span>所属类目： {{post.categoryName}}</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <span>{{post.title}}</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <div class="alert alert-info" role="alert">
+              {{post.content}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <textarea placeholder="Enter the answer..." class="form-control" style="height: 200px;" ng-model="post.content"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <div>
+              <div ckeditor="options" ng-model="post.content" ready="onReady()"></div>
+            </div>
+          </div>
+          
+        </div>     
+        <div class="form-group">
+          <div class="col-sm-12">
+            <button class="btn btn-primary" type="submit" title="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- <footer class="footer text-center"><p>&copy; 2016 TimeItem, Inc.</p></footer> -->
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-ckeditor/angular-ckeditor.js"></script>
+    <script type="text/javascript" src="/app/common/page-layout-init.js"></script>
+
+    <script type="text/javascript" src="/app/admin/admin.js"></script>
+    <script type="text/javascript" src="/app/admin/controllers.js"></script>
+    <script type="text/javascript" src="/app/admin/services.js"></script>
+
+    <!-- <script type="text/javascript" src="/app/admin/post.js"></script> -->
+  </body>
+</html>

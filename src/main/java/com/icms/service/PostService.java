@@ -1,5 +1,7 @@
 package com.icms.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,27 +9,29 @@ import org.springframework.stereotype.Service;
 
 import com.icms.mapper.PostMapper;
 import com.icms.model.Post;
+import com.icms.model.TemplateHome;
+import com.icms.model.TemplateItem;
 import com.icms.service.remote.PostRemote;
 
 @Service
 public class PostService implements PostRemote {
 	
-	@Autowired PostMapper pointMapper;
+	@Autowired PostMapper postMapper;
 
 	@Override
 	public Post getById(Integer id) {
-		return pointMapper.selectByPrimaryKey(id);
+		return postMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
 	public void save(Post post, Boolean isAllField) {
 		if (post.getPid() == null) {
-			pointMapper.insertSelective(post);
+			postMapper.insertSelective(post);
 		} else {
 			if (isAllField) {
-				pointMapper.updateByPrimaryKey(post);
+				postMapper.updateByPrimaryKey(post);
 			} else {
-				pointMapper.updateByPrimaryKeySelective(post);
+				postMapper.updateByPrimaryKeySelective(post);
 			}
 		}
 	}
@@ -36,7 +40,43 @@ public class PostService implements PostRemote {
 	public List<Post> getListByCategoryId(Integer id) {
 		Post q = new Post();
 		q.setCid(id);
-		return pointMapper.findByParams(q);
+		return postMapper.findByParams(q);
+	}
+
+	@Override
+	public void loadTemplateHomeDatas(TemplateHome th) {
+		Integer headlinePostId = th.getHeadlinePostId();
+		if (null != headlinePostId && headlinePostId > 0) {
+			th.setHeadlinePost(postMapper.selectByPrimaryKey(headlinePostId));
+		}
+		List<TemplateItem> tis = th.getTemplateItems();
+		
+//		for (TemplateItem ti : tis) {
+//			int staticSize = null == ti.getStaticPosts() ? 0 : ti.getStaticPosts().size();
+//			List<Post> posts = this.loadRecentPosts(ti.getCategoryId(), ti.getCount() - staticSize);
+//		}
+		for (Iterator<TemplateItem> iterator = tis.iterator(); iterator.hasNext();) {
+			TemplateItem ti = (TemplateItem) iterator.next();
+			int staticSize = null == ti.getStaticPosts() ? 0 : ti.getStaticPosts().size();
+			List<Post> posts = this.loadRecentPosts(ti.getCategoryId(), ti.getCount() - staticSize);
+			posts.addAll(getByIds(ti.getStaticPosts()));
+			ti.setPosts(posts);
+		}
+	}
+
+	private List<Post> getByIds(List<Integer> staticPosts) {
+		
+		return (null == staticPosts || staticPosts.size() == 0) ? new ArrayList<Post>() : postMapper.findByIds(staticPosts);
+	}
+
+	public List<Post> loadRecentPosts(Integer cid, Integer count) {
+		
+		return postMapper.loadRecentPosts(cid, count);
+	}
+
+	@Override
+	public void delete(Integer pid) {
+		postMapper.deleteByPrimaryKey(pid);
 	}
 
 }

@@ -15,22 +15,22 @@ import com.icms.service.remote.CategoryRemote;
 @Service
 public class CategoryService implements CategoryRemote {
 
-	@Autowired CategoryMapper itemMapper;
+	@Autowired CategoryMapper categoryMapper;
 	
 	@Override
 	public Category getById(Integer id) {
-		return itemMapper.selectByPrimaryKey(id);
+		return categoryMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
 	public void save(Category cate, Boolean isUpdateAll) {
 		if (cate.getCid() == null) {
-			itemMapper.insert(cate);
+			categoryMapper.insert(cate);
 		} else {
 			if (isUpdateAll) {
-				itemMapper.updateByPrimaryKey(cate);				
+				categoryMapper.updateByPrimaryKey(cate);				
 			} else {
-				itemMapper.updateByPrimaryKeySelective(cate);
+				categoryMapper.updateByPrimaryKeySelective(cate);
 			}
 		}
 	}
@@ -39,12 +39,17 @@ public class CategoryService implements CategoryRemote {
 	public List<Category> getListByParentId(Integer id) {
 		Category query = new Category();
 		query.setPid(id);
-		return itemMapper.findByParams(query);
+		return categoryMapper.findByParams(query);
 	}
 
 	@Override
 	public List<Category> findByParams(Category item) {
-		return itemMapper.findByParams(item);
+		return categoryMapper.findByParams(item);
+	}
+
+	@Override
+	public void delete(Integer id) {
+		categoryMapper.deleteByPrimaryKey(id);
 	}
 
 }

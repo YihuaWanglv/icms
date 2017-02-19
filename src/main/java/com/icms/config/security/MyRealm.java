@@ -33,9 +33,9 @@ public class MyRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		UserDTO user = (UserDTO) principals.getPrimaryPrincipal();
+		User user = (User) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		List<String> roles = userMapper.findRoleNameByUserId(user.getId());
+		List<String> roles = userMapper.findRoleNameByUserId(user.getUid());
 		info.addRoles(roles);
 		return info;
 	}
