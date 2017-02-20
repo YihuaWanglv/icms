@@ -22,7 +22,11 @@
       if ($scope.command > 0 && $scope.pid && $scope.pid > 0) {
         post.$update(function(post) {
           layer.msg('保存成功');
-          window.location.reload();
+          if ($scope.command=2) {
+            window.location.href='/view/admin/post.html?command=1&pid='+$scope.pid;
+          } else {
+            window.location.reload();
+          }
         });
       } else {
         if (!$scope.cid) {
@@ -37,6 +41,7 @@
           $scope.pid=post.pid;
           $scope.post = post;
           layer.msg('保存成功');
+          window.location.href='/view/admin/post.html?command=1&pid='+$scope.pid;
         });
       }
     };

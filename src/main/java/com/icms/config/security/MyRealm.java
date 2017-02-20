@@ -17,7 +17,6 @@ import com.icms.mapper.UserMapper;
 import com.icms.model.User;
 import com.icms.model.base.CredentialsInfoHolder;
 import com.icms.service.remote.UserRemote;
-import com.icms.web.dto.UserDTO;
 
 //@Component
 public class MyRealm extends AuthorizingRealm {

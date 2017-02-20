@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <div class="nav-right-holder"></div>
+    <div class="container">
+      <div class="page-header content-center">
+        <h1>网站首页配置</h1>
+      </div>
+      <div class="row">
+        <form role="form">
+          <div class="group-website">
+            <div class="form-group">
+              <label for="isOnWebSiteHeader">
+                <input type="checkbox" class="form-inline-checkbox" name="isOnWebSiteHeader">是否显示网站名称和介绍
+              </label>
+            </div>
+            <div class="form-group">
+              <label for="webSiteName">网站名称</label>
+              <input name="webSiteName" type="text" class="form-control" placeholder="请输入网站名称">
+            </div>
+            <div class="form-group">
+              <label for="webSiteDetail">网站介绍</label>
+              <textarea placeholder="请输入网站介绍" class="form-control" style="height: 200px;"></textarea>
+            </div>
+            <hr />
+          </div>
+          <div class="group-headline">
+            <div class="form-group">
+              <label for="isOnHeadline">
+                <input type="checkbox" class="form-inline-checkbox" name="isOnHeadline">是否显示网站头条
+              </label>
+            </div>
+            <div class="form-group">
+              <div class="radio">
+                <label>
+                  <input type="radio" name="headlineType" id="headlineType-static" value="0" checked>显示固定的文章
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="headlinePostId">文章ID:</label>
+              <input name="headlinePostId" type="text" class="form-control" placeholder="请输入文章ID">
+            </div>
+            <div class="form-group">
+              <div class="radio">
+                <label>
+                  <input type="radio" name="headlineType" id="headlineType-category" value="1">显示特定类目最新文章
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="headlineCategoryId" class="control-label">网站头条类目:</label>
+              <div>
+                <select class="form-control">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                </select>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div class="group-template-item-static">
+            <div class="form-group">
+              <label for="webSiteName">板块名称</label>
+              <input name="webSiteName" type="text" class="form-control" placeholder="请输入网站名称">
+            </div>
+            <div class="form-group">
+              <label class="control-label">选择模板:</label>
+              <div>
+                <select class="form-control">
+                  <option>1</option>
+                  <option>2</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn btn-default">增加一个固定文章</button>
+            </div>
+            <hr />
+          </div>
+          <div class="group-template-item-dynamic">
+            
+          </div>
+          <div class="form-group content-center">
+            <button type="button" class="btn btn-default">增加一个板块</button>
+            <button type="submit" class="btn btn-success">保存</button>
+          </div>
+        </form>          
+      </div>
+    </div>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/app/common/page-layout-init.js"></script>
+    <!-- <script type="text/javascript" src="/app/admin/category/category.js"></script>
+    <script type="text/javascript" src="/app/admin/category/controllers.js"></script>
+    <script type="text/javascript" src="/app/admin/category/services.js"></script> -->
+  </body>
+</html>
