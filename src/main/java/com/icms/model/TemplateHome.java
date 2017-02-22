@@ -8,11 +8,11 @@ public class TemplateHome implements Serializable {
 	private static final long serialVersionUID = -862088404913732000L;
 	
 	private int isOnWebSiteHeader=1;
-	private String webSiteName;
-	private String webSiteDetail;
+	private String webSiteName="";
+	private String webSiteDetail="";
 	private int isOnHeadline=1;
-	private int headlineCategoryId;
-	private Integer headlinePostId;
+	private int headlineCategoryId=0;
+	private Integer headlinePostId=0;
 	private Post headlinePost;
 	private List<TemplateItem> templateItems;
 	

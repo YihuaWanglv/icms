@@ -3,93 +3,125 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/bower_components/angular-ui-select/dist/select.min.css" />
     <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/config.css" />
   </head>
-  <body>
+  <body ng-app="config-home">
     <div id="header"></div>
     <div class="nav-right-holder"></div>
-    <div class="container">
+    <div class="container" ng-controller="ConfigHomeController">
       <div class="page-header content-center">
         <h1>网站首页配置</h1>
       </div>
       <div class="row">
         <form role="form">
-          <div class="group-website">
+          <div class="group-website content-group">
             <div class="form-group">
               <label for="isOnWebSiteHeader">
-                <input type="checkbox" class="form-inline-checkbox" name="isOnWebSiteHeader">是否显示网站名称和介绍
+                <input type="checkbox" class="form-inline-checkbox" name="isOnWebSiteHeader" ng-model="isOnWebSiteHeader">是否显示网站名称和介绍
               </label>
             </div>
             <div class="form-group">
               <label for="webSiteName">网站名称</label>
-              <input name="webSiteName" type="text" class="form-control" placeholder="请输入网站名称">
+              <input name="webSiteName" type="text" class="form-control" placeholder="请输入网站名称" ng-model="templateHome.webSiteName">
             </div>
             <div class="form-group">
               <label for="webSiteDetail">网站介绍</label>
-              <textarea placeholder="请输入网站介绍" class="form-control" style="height: 200px;"></textarea>
+              <textarea placeholder="请输入网站介绍" class="form-control" style="height: 200px;" ng-model="templateHome.webSiteDetail"></textarea>
             </div>
             <hr />
           </div>
-          <div class="group-headline">
+          <div class="group-headline content-group">
             <div class="form-group">
               <label for="isOnHeadline">
-                <input type="checkbox" class="form-inline-checkbox" name="isOnHeadline">是否显示网站头条
+                <input type="checkbox" class="form-inline-checkbox" name="isOnHeadline" ng-model="isOnHeadline">是否显示网站头条
               </label>
             </div>
             <div class="form-group">
               <div class="radio">
                 <label>
-                  <input type="radio" name="headlineType" id="headlineType-static" value="0" checked>显示固定的文章
+                  <input type="radio" name="headlineType" id="headlineType-static" ng-model="headlineType" ng-value="0">显示固定的文章
                 </label>
               </div>
             </div>
             <div class="form-group">
               <label for="headlinePostId">文章ID:</label>
-              <input name="headlinePostId" type="text" class="form-control" placeholder="请输入文章ID">
+              <input name="headlinePostId" type="text" class="form-control" placeholder="请输入文章ID" ng-model="templateHome.headlinePostId">
             </div>
             <div class="form-group">
               <div class="radio">
                 <label>
-                  <input type="radio" name="headlineType" id="headlineType-category" value="1">显示特定类目最新文章
+                  <input type="radio" name="headlineType" id="headlineType-category" ng-model="headlineType" ng-value="1">显示特定类目最新文章
                 </label>
               </div>
             </div>
             <div class="form-group">
               <label for="headlineCategoryId" class="control-label">网站头条类目:</label>
               <div>
-                <select class="form-control">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                </select>
+                <ui-select ng-model="headlineCategory" theme="bootstrap">
+                  <ui-select-match placeholder="Select a category...">{{$select.selected.name}}</ui-select-match>
+                  <ui-select-choices repeat="category in categorys">
+                    <div ng-bind-html="category.name"></div>
+                  </ui-select-choices>
+                </ui-select>
               </div>
             </div>
             <hr />
           </div>
-          <div class="group-template-item-static">
-            <div class="form-group">
-              <label for="webSiteName">板块名称</label>
-              <input name="webSiteName" type="text" class="form-control" placeholder="请输入网站名称">
-            </div>
-            <div class="form-group">
-              <label class="control-label">选择模板:</label>
-              <div>
-                <select class="form-control">
-                  <option>1</option>
-                  <option>2</option>
-                </select>
+
+          <div ng-repeat="item in templateHome.templateItems track by $index">
+            <div class="group-template-item-static content-group">
+              <div class="form-group">
+                <label>板块名称</label>
+                <input type="text" class="form-control" ng-model="item.name" placeholder="请输入网站名称">
               </div>
+              <div class="form-group">
+                <label class="control-label">选择类目:</label>
+                <div>
+                  <ui-select ng-model="item.cate" theme="bootstrap">
+                    <ui-select-match placeholder="Select a category...">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="category in categorys">
+                      <div ng-bind-html="category.name"></div>
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label">选择模板:</label>
+                <div>
+                  <ui-select ng-model="item.temp" theme="bootstrap">
+                    <ui-select-match placeholder="Select a template...">{{$select.selected.templateName}}</ui-select-match>
+                    <ui-select-choices repeat="template in templates">
+                      <div ng-bind-html="template.templateName"></div>
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="indexs">板块顺序:</label>
+                <input name="indexs" ng-model="item.indexs" type="text" class="form-control" placeholder="请输入板块位置顺序">
+              </div>
+              <div class="form-group">
+                <label for="count">显示文章数量:</label>
+                <input name="count" ng-model="item.count" type="text" class="form-control" placeholder="请输入显示文章数量">
+              </div>
+              <div ng-repeat="post in item.staticPosts track by $index">
+                <div class="form-group">
+                  <label>文章ID:</label>
+                  <input type="text" ng-model="post" class="form-control" placeholder="请输入文章ID">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <button type="button" class="btn btn-default" ng-click="addStaticPost(item);">增加一个固定文章</button>
+              </div>
+              <hr />
             </div>
-            <div class="form-group">
-              <button type="button" class="btn btn-default">增加一个固定文章</button>
-            </div>
-            <hr />
           </div>
-          <div class="group-template-item-dynamic">
-            
-          </div>
-          <div class="form-group content-center">
-            <button type="button" class="btn btn-default">增加一个板块</button>
+          
+          <div class="form-group content-center content-group">
+            <button type="button" class="btn btn-default" ng-click="addTemplateItem(templateHome);">增加一个板块</button>
             <button type="submit" class="btn btn-success">保存</button>
           </div>
         </form>          
@@ -100,9 +132,10 @@
     <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-ui-select/dist/select.min.js"></script>
     <script type="text/javascript" src="/app/common/page-layout-init.js"></script>
-    <!-- <script type="text/javascript" src="/app/admin/category/category.js"></script>
-    <script type="text/javascript" src="/app/admin/category/controllers.js"></script>
-    <script type="text/javascript" src="/app/admin/category/services.js"></script> -->
+    <script type="text/javascript" src="/app/admin/config/config-home.js"></script>
+    <script type="text/javascript" src="/app/admin/config/controllers.js"></script>
+    <script type="text/javascript" src="/app/admin/config/services.js"></script>
   </body>
 </html>

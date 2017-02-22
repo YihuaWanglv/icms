@@ -29,7 +29,7 @@ public class ConfigService implements ConfigRemote {
 	}
 
 	@Override
-	public void save(Config config, Boolean isAllField) {
+	public void save(Config config) {
 		
 		configRepository.save(config);
 	}

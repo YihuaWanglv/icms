@@ -10,6 +10,6 @@ public interface ConfigRemote {
 	
 	Config getConfigOfHome();
 	
-	void save(Config point, Boolean isAllField);
+	void save(Config config);
 	
 }
