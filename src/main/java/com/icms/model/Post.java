@@ -1,5 +1,6 @@
 package com.icms.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,7 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Post {
+public class Post implements Serializable {
+	private static final long serialVersionUID = -4606603027213038773L;
 	@Id
 	@GeneratedValue
     private Integer pid;
@@ -32,6 +34,8 @@ public class Post {
 	private Date updated;
 	@Column
 	private Integer deleted;
+	@Column
+	private String introduction;
 	
 	public Integer getPid() {
 		return pid;
@@ -99,7 +103,11 @@ public class Post {
 	public void setDeleted(Integer deleted) {
 		this.deleted = deleted;
 	}
-    
-    
+	public String getIntroduction() {
+		return introduction;
+	}
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
     
 }

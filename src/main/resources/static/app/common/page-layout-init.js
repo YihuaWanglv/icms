@@ -1,12 +1,5 @@
 $(function() {
   $("#header").load("/view/header.html", function(){
-    // $(".menu-nav-right").on('click', function() {
-    //   if($('.nav-right').hasClass('my-navbar-right-show')) {
-    //     $(".nav-right").removeClass('my-navbar-right-show');
-    //   } else {
-    //     $('.nav-right').addClass('my-navbar-right-show');
-    //   }
-    // });
     if (TI_cookie.getCookie('username')) {
       $('.field-username').text(TI_cookie.getCookie('username'));
       $('.login-on').show();
@@ -15,6 +8,16 @@ $(function() {
       $('.login-off').show();
       $('.login-on').hide();
     }
+    if (TI_cookie.getCookie('isAdmin')) {
+      var isAdmin = TI_cookie.getCookie('isAdmin');
+      console.log(isAdmin);
+      if (isAdmin && isAdmin=='1') {
+        $('.is-admin').show();
+      } else {
+        $('.is-admin').hide();
+      }
+    } else {
+      $('.is-admin').hide();
+    }
   });
-  // $(".nav-right-holder").load("./view/nav-right.html");
 });

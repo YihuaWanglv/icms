@@ -2,14 +2,12 @@ package com.icms.web.dto;
 
 import java.io.Serializable;
 
-import com.icms.model.base.FieldExtend;
+public class UserDto implements Serializable {
 
+	private static final long serialVersionUID = -8236563306402600960L;
 
-public class UserDTO implements Serializable {
-
-	private static final long serialVersionUID = 127199294326731001L;
-
-	private Long id;
+	private Long uid;
+	private Integer rid;
 	private String name;
 	private String password;
 	private Integer type;
@@ -19,23 +17,19 @@ public class UserDTO implements Serializable {
 	private Integer deleted;
 	private Integer enable;
 	private String code;
-	private long userConfigId;
-//	private 
-
-	private FieldExtend fieldExtend = new FieldExtend();
-
-	public UserDTO() {
+	
+	public UserDto() {
 		super();
 	}
 
-	public UserDTO(Long id, String name, Integer type) {
+	public UserDto(Long uid, String name, String password, Integer type) {
 		super();
 		this.name = name;
 	}
-	
-	public UserDTO(Long id, String name, String password, Integer type, String salt, String email, String mobile, Integer deleted, Integer enable, String code, FieldExtend fieldExtend) {
+
+	public UserDto(Long uid, String name, String password, Integer type, String salt, String email, String mobile, Integer deleted, Integer enable, String code) {
 		super();
-		this.id = id;
+		this.uid = uid;
 		this.name = name;
 		this.password = password;
 		this.type = type;
@@ -45,19 +39,26 @@ public class UserDTO implements Serializable {
 		this.deleted = deleted;
 		this.enable = enable;
 		this.code = code;
-		this.fieldExtend = fieldExtend;
 	}
 
 	public String getName() {
 		return this.name;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getUid() {
+		return uid;
 	}
-
-	public void setId(Long id) {
-		this.id = id;
+	
+	public void setUid(Long uid) {
+		this.uid = uid;
+	}
+	
+	public Integer getRid() {
+		return rid;
+	}
+	
+	public void setRid(Integer rid) {
+		this.rid = rid;
 	}
 
 	public Integer getType() {
@@ -70,13 +71,6 @@ public class UserDTO implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public FieldExtend getFieldExtend() {
-		return fieldExtend;
-	}
-	public void setFieldExtend(FieldExtend fieldExtend) {
-		this.fieldExtend = fieldExtend;
 	}
 
 	public String getPassword() {
@@ -126,7 +120,7 @@ public class UserDTO implements Serializable {
 	public void setEnable(Integer enable) {
 		this.enable = enable;
 	}
-
+	
 	public String getCode() {
 		return code;
 	}
@@ -134,19 +128,10 @@ public class UserDTO implements Serializable {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
-	public long getUserConfigId() {
-		return userConfigId;
-	}
-
-	public void setUserConfigId(long userConfigId) {
-		this.userConfigId = userConfigId;
-	}
 
 	@Override
 	public String toString() {
-		return "UserDTO [id=" + id + ", name=" + name + ", password=" + password + ", type=" + type + ", salt=" + salt + ", email=" + email + ", mobile=" + mobile + ", deleted=" + deleted
-				+ ", enable=" + enable + ", code=" + code + ", fieldExtend=" + fieldExtend + "]";
+		return "User [uid=" + uid + ", name=" + name + ", password=" + password + ", type=" + type + ", salt=" + salt + ", email=" + email + ", mobile=" + mobile + ", deleted=" + deleted + ", enable="
+				+ enable + ", code=" + code + "]";
 	}
-
 }

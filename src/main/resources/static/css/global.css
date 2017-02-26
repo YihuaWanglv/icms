@@ -36,7 +36,7 @@ div.ui-select-container .btn-default {
 .starter-template {
 	padding: 40px 0 0 0;
 	text-align: center;
-	height:60vh;
+	height:40vh;
 }
 .jumbotron {
 	height:100%;
@@ -104,23 +104,19 @@ div.ui-select-container .btn-default {
 
 
 /**/
-.navbar-inverse {
-    /*background-color: #fff8e7;
-    border-color: #fff8e7;*/
+/*.navbar-inverse {
     background-color: #fff;
     border-color: #fff;
 }
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    /*border-color: #fff8e7;*/
     border-color: #fff;
 }
 .navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus {
     color: #000;
-    /*background-color: transparent;*/
 }
 .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
     color: #000;
-}
+}*/
 
 /*hide and show*/
 .show {
@@ -183,9 +179,21 @@ div.ui-select-container .btn-default {
 }
 .testimonials-text {
     margin-left: 105px;
+    height: 150px;
 }
 .testimonials-desc {
     padding: 0;
     margin: 0;
     margin-top: 5px;
 }
+
+.template-container {
+	margin-top: 80px;
+}
+
+.crop { 
+ 	overflow: hidden; 
+	white-space: inherit;/*nowrap;*//*nowrap是对横着的一行文字截断*/
+	text-overflow: ellipsis;
+	height: 100px;
+}​

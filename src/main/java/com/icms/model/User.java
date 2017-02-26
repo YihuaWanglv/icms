@@ -1,6 +1,7 @@
 package com.icms.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,6 +42,12 @@ public class User implements Serializable {
 	private Integer enable;
 	@Column()
 	private String code;
+	@Column()
+	private Date created;
+	@Column()
+	private Date updated;
+	@Column()
+	private Integer status;
 //	@Column
 //	private long userConfigId;
 	public User() {
@@ -161,6 +168,30 @@ public class User implements Serializable {
 //	public void setUserConfigId(long userConfigId) {
 //		this.userConfigId = userConfigId;
 //	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {

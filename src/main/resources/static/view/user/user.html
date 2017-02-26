@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    
+    <div class="container">
+      <div class="page-header">
+        <h2>用户中心</h2>
+        
+      </div>
+      <dl class="dl-horizontal">
+        <dt>用户名称:</dt>
+        <dd>${user.name!}</dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>邮箱地址:</dt>
+        <dd>${user.email!}</dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>联系电话:</dt>
+        <dd>${user.mobile!}</dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>注册时间:</dt>
+        <dd>${user.created?datetime}</dd>
+      </dl>
+      
+      
+    </div>
+    <footer class="footer text-center"><p>&copy; 2015~2017 广州赑晶企业管理有限公司, Inc.</p></footer>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/app/common/page-layout-init.js"></script>
+    <!-- <script type="text/javascript" src="/app/user/user.js"></script> -->
+  </body>
+</html>

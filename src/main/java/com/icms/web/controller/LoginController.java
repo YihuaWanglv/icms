@@ -13,6 +13,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +26,13 @@ public class LoginController {
 	public void login(HttpServletRequest req, HttpServletResponse resp, String username, String password) throws ServletException, IOException {
 		Subject subject = SecurityUtils.getSubject();
 		String error = null;
+		String url = null;
+		try {
+			url = WebUtils.getSavedRequest(req).getRequestUrl();			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(url);
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		try {
 			subject.login(token);
@@ -38,12 +46,28 @@ public class LoginController {
 		}
 		if (error != null) {// 出错了，返回登录页面
 			req.setAttribute("error", error);
-			resp.sendRedirect("/forbidden.html");
+			resp.sendRedirect("/view/sign-in.html");
 		} else {// 登录成功
 			Cookie cookie = new Cookie("username", username);
 			cookie.setPath("/");
 			resp.addCookie(cookie);
-			resp.sendRedirect("/home.html");// 设置跳转的页面
+			Cookie cookieRole = new Cookie("isAdmin", "0");
+			cookieRole.setPath("/");
+			if (subject.hasRole("admin")) {
+				cookieRole = new Cookie("isAdmin", "1");
+			}
+			resp.addCookie(cookieRole);
+			
+			
+			if (url != null) {
+				if (!"".equals(url) && url.endsWith("html")) {
+					resp.sendRedirect(url);// 设置跳转的页面									
+				} else {
+					resp.sendRedirect("");
+				}
+			} else {
+				resp.sendRedirect("");
+			}
 		}
 	}
 
@@ -55,7 +79,7 @@ public class LoginController {
 		currentUser.logout();
 		delete(req, resp, "username");
 		
-		resp.sendRedirect("/index.html");
+		resp.sendRedirect("/");
 	}
 	
 	public void delete(HttpServletRequest req, HttpServletResponse resp, String key) {
