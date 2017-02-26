@@ -16,10 +16,10 @@
           <div class="col-lg-6">
             <div class="testimonials-main">
               <div class="testimonials-block">
-                <div class="testimonials-photo"><img src="/images/sample.jpg" alt=""></div>
+                <div class="testimonials-photo"><img src="/images/sample.jpg" alt="" height="125" width="125"></div>
                 <div class="testimonials-text">
-                  <div class="testimonials-name"><h4>${post.pid} - ${post.title}</h4> </div>
-                  <div class="testimonials-desc"><p>${post.content}</p></div>
+                  <div class="testimonials-name"><h4><a href="/post.html?pid=${post.pid}" target="_blank">${post.title!}</a></h4></div>
+                  <div class="testimonials-desc crop"><p>${post.introduction!}</p></div>
                 </div>
               </div>
             </div>

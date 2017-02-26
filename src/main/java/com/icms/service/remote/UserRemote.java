@@ -22,5 +22,8 @@ public interface UserRemote {
 	public User findUserByName(String username);
 	public User updateUser(User user, Boolean isUpdateSelected) throws NoSuchAlgorithmException, InvalidKeySpecException;
 	
+//	public UserDto findUserDtoById(Long id);
+//	public UserDto findUserDtoByName(String username);
+	
 
 }

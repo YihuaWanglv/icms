@@ -3,7 +3,6 @@ package com.icms.service;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.script.DigestUtils;
 import org.springframework.stereotype.Service;
@@ -37,7 +36,8 @@ public class UserService implements UserRemote {
 		user.setPassword(PasswordSecureHash.hashEncrypt(user.getPassword(), salt));
 		user.setSalt(salt);
 		user.setCode(DigestUtils.sha1DigestAsHex(user.getCode()+salt));
-		user = userRepository.save(user);
+		userRepository.save(user);
+		System.err.println(user.getUid());
 		return user;
 	}
 
@@ -48,13 +48,8 @@ public class UserService implements UserRemote {
 
 	@Override
 	public User findUserByName(String username) {
-		User result = null;
 		User user = userRepository.findByName(username);
-		if (user != null) {
-			result = new User();
-			BeanUtils.copyProperties(user, result);
-		}
-		return result;
+		return user;
 	}
 
 
@@ -71,6 +66,29 @@ public class UserService implements UserRemote {
 		}
 		return user;
 	}
+
+//	@Override
+//	public UserDto findUserDtoById(Long id) {
+//		Assert.notNull(id, "userId can not be null!");
+//		User u = userRepository.findOne(id);
+//		if (null != u) {
+//			UserDto user = new UserDto();
+//			BeanUtils.copyProperties(u, user);
+//			return user;
+//		}
+//		return null;
+//	}
+//
+//	@Override
+//	public UserDto findUserDtoByName(String username) {
+//		User user = userRepository.findByName(username);
+//		if (null != user) {
+//			UserDto userDto = new UserDto();
+//			BeanUtils.copyProperties(user, userDto);
+//			return userDto;
+//		}
+//		return null;
+//	}
 
 
 	

@@ -4,32 +4,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/post/post.css" />
 </head>
 <body>
   <div id="header"></div>
-  <div style="background:transparent !important" class="jumbotron">
-    <div class="container">
-    <h3>欢迎! <span class="field-username"></span>你已成功注册赑晶账号!</h3>
-      <p>你现在可以登录.</p>
-      <p class="lead">
-        <a href="/view/sign-in.html" class="btn btn-lg btn-success field-index">登录</a>
-      </p>
-      <h3>或者,</h3>
-      <p class="lead">
-        <a href="/" class="btn btn-lg btn-success">返回首页</a>
-      </p>
+
+  <div class="container">
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Library</a></li>
+      <li class="active">Data</li>
+    </ol>
+    <header class="post-header">
+        <h3 class="post-title">${post.title!}</h3>
+        <section class="post-meta">
+            <time class="post-date" datetime="${post.created?datetime}">${post.created?datetime}</time> 
+        </section>
+    </header>
+    <div class="container-content">
+      <img src="/images/post-test.png">
+      ${post.content!}
     </div>
   </div>
+
+  
   <footer class="footer text-center"><p>&copy; 2015~2017 广州赑晶企业管理有限公司, Inc.</p></footer>
+
   <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/app/common/page-layout-init.js"></script>
   <script> 
-    $(function(){
-      // $("#header").load("/view/header.html");
-      if (localStorage.name) $('.field-username').text(localStorage.name);
-      // if (localStorage.index) $('.field-index').attr("href",localStorage.index);
-    });
   </script>
 </body>
 </html>

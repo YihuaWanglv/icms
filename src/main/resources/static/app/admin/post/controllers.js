@@ -35,6 +35,7 @@
         }
         new Post({
           title: $scope.post.title,
+          introduction: $scope.post.introduction,
           content: $scope.post.content,
           cid: $scope.cid
         }).$save(function(post) {

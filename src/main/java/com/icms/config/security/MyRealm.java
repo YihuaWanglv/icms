@@ -18,7 +18,6 @@ import com.icms.model.User;
 import com.icms.model.base.CredentialsInfoHolder;
 import com.icms.service.remote.UserRemote;
 
-//@Component
 public class MyRealm extends AuthorizingRealm {
 
 	@Autowired
@@ -26,9 +25,6 @@ public class MyRealm extends AuthorizingRealm {
 
 	@Autowired
 	UserMapper userMapper;
-
-	// @Autowired
-	// CredentialsMatcher customCredentialsMatcher;
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {

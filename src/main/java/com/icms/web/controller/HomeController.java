@@ -5,14 +5,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.icms.model.Config;
 import com.icms.model.TemplateHome;
-import com.icms.model.base.JsonObject;
 import com.icms.service.remote.ConfigRemote;
 import com.icms.service.remote.PostRemote;
 
@@ -28,7 +26,8 @@ public class HomeController {
 	private PostRemote postService;
 	private static final Gson g = new GsonBuilder().serializeNulls().create();
 
-	@GetMapping("/")
+//	@GetMapping("/")
+	@RequestMapping("/")
 	public String index(Map<String, Object> model) {
 		Config c = configService.getConfigOfHome();
 		TemplateHome th = g.fromJson(c.getContent(), TemplateHome.class);
@@ -41,12 +40,12 @@ public class HomeController {
 		return "home";
 	}
 
-	@GetMapping("/json")
-	@ResponseBody
-	public JsonObject welcome() {
-		JsonObject jb = new JsonObject();
-		jb.setStatus(1);
-		return jb;
-	}
+//	@GetMapping("/json")
+//	@ResponseBody
+//	public JsonObject welcome() {
+//		JsonObject jb = new JsonObject();
+//		jb.setStatus(1);
+//		return jb;
+//	}
 
 }

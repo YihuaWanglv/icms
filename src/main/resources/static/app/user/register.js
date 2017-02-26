@@ -7,19 +7,20 @@ $().ready(function() {
             params.password = $('#password').val();
             params.name = $('#name').val();
             params.email = $('#email').val();
+            params.mobile = $('#mobile').val();
           	$.ajax({
-	            url: '/user',
+	            url: '/user/create',
 	            data: params,
 	            type:"POST",
 	            success: function (data) {
-	                if (data.status) {
+	                if (data && null!=data.status && data.status==0) {
 	                	layer.msg('success!');
                         localStorage.email = params.email;
                         localStorage.username = params.name;
-                        localStorage.index = data.data.index;
+                        // localStorage.index = data.data.index;
 	                	window.location.href='/view/sign-up-finished.html';	                	
 	                } else {
-	                	layer.msg('Failed to create your account!' + data.message);
+	                	layer.msg('注册账号失败!' + data.message);
 	                }
 	            }
 	        }).always(function() {

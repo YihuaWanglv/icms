@@ -12,13 +12,14 @@
 		<result column="creator" jdbcType="INTEGER" property="creator" />
 		<result column="updated" jdbcType="TIMESTAMP" property="updated" />
 		<result column="editor" jdbcType="INTEGER" property="editor" />
+		<result column="introduction" jdbcType="VARCHAR" property="introduction" />
 	</resultMap>
 	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
 		type="com.icms.model.Post">
 		<result column="content" jdbcType="LONGVARCHAR" property="content" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		pid, cid, title, deleted, type, status, created, creator, updated, editor
+		pid, cid, title, deleted, type, status, created, creator, updated, editor, introduction
 	</sql>
 	<sql id="Blob_Column_List">
 		content
@@ -98,13 +99,13 @@
 		insert into post (pid, cid, title,
 		deleted, type, status,
 		created, creator, updated,
-		editor, content)
+		editor, content, introduction)
 		values (#{pid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER},
 		#{title,jdbcType=VARCHAR},
 		#{deleted,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, #{status,jdbcType=TINYINT},
 		#{created,jdbcType=TIMESTAMP}, #{creator,jdbcType=INTEGER},
 		#{updated,jdbcType=TIMESTAMP},
-		#{editor,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+		#{editor,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}, #{introduction, jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective" parameterType="com.icms.model.Post" useGeneratedKeys="true" keyProperty="pid">
 		insert into post
@@ -142,6 +143,9 @@
 			<if test="content != null">
 				content,
 			</if>
+			<if test="introduction != null">
+				introduction,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="pid != null">
@@ -176,6 +180,9 @@
 			</if>
 			<if test="content != null">
 				#{content,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="introduction != null">
+				#{introduction,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -212,6 +219,9 @@
 			<if test="content != null">
 				content = #{content,jdbcType=LONGVARCHAR},
 			</if>
+			<if test="introduction != null">
+				introduction = #{introduction,jdbcType=VARCHAR},
+			</if>
 		</set>
 		where pid = #{pid,jdbcType=INTEGER}
 	</update>
@@ -226,6 +236,7 @@
 		creator = #{creator,jdbcType=INTEGER},
 		updated = #{updated,jdbcType=TIMESTAMP},
 		editor = #{editor,jdbcType=INTEGER},
+		introduction = #{introduction,jdbcType=VARCHAR},
 		content = #{content,jdbcType=LONGVARCHAR}
 		where pid = #{pid,jdbcType=INTEGER}
 	</update>
@@ -239,7 +250,9 @@
 		created = #{created,jdbcType=TIMESTAMP},
 		creator = #{creator,jdbcType=INTEGER},
 		updated = #{updated,jdbcType=TIMESTAMP},
-		editor = #{editor,jdbcType=INTEGER}
+		editor = #{editor,jdbcType=INTEGER},
+		introduction = #{introduction,jdbcType=VARCHAR},
+		content = #{content,jdbcType=LONGVARCHAR}
 		where pid = #{pid,jdbcType=INTEGER}
 	</update>
 	

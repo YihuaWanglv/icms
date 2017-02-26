@@ -6,12 +6,8 @@ shiro:
   filterChainDefinitions:
     "/login": anon
     "/view/sign-in": anon
+    "/forbidden.html": anon
     "/sign-up": anon
-    "/user/**": anon
-    "/view/report.html": authc
-    "/home.html": authc
-    "/view/admin/**": authc
-    "/view/**": anon
     "/css/**": anon
     "/static/**": anon
     "/bower_components/**": anon
@@ -23,6 +19,11 @@ shiro:
     "/about.html": anon
     "/logout": anon
     "/": anon
+    "/view/header**": anon
+    "/view/**": anon
+    "/user/create": anon
+    "/user/**": authc
+    "/view/admin/**": authc,roles[admin]
     "/**": authc
   enableShareJsession: true
   shareJsessionKey: SHAREJSESSIONID
