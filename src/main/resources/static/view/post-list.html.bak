@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/post/post-list.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <div class="container">
+      <div class="page-header">
+        <h3>文章列表</h3>
+      </div>
+    </div>
+    <div class="container">
+      <div class="well well-sm">
+          <strong>显示模式</strong>
+          <div class="btn-group">
+              <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+              </span>列表</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                  class="glyphicon glyphicon-th"></span>表格</a>
+          </div>
+      </div>
+      <div id="products" class="row list-group row-icms">
+          <div class="item  col-xs-4 col-lg-4">
+              <div class="thumbnail">
+                  <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+                  <div class="caption">
+                      <h4 class="group inner list-group-item-heading">
+                          Product title</h4>
+                      <p class="group inner list-group-item-text">
+                          Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                          sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                      <div class="row">
+                          <div class="col-xs-12 col-md-6">
+                              <p class="lead">
+                                  $21.000</p>
+                          </div>
+                          <div class="col-xs-12 col-md-6">
+                              <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="item  col-xs-4 col-lg-4">
+              <div class="thumbnail">
+                  <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+                  <div class="caption">
+                      <h4 class="group inner list-group-item-heading">
+                          Product title</h4>
+                      <p class="group inner list-group-item-text">
+                          Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                          sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                      <div class="row">
+                          <div class="col-xs-12 col-md-6">
+                              <p class="lead">
+                                  $21.000</p>
+                          </div>
+                          <div class="col-xs-12 col-md-6">
+                              <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="item  col-xs-4 col-lg-4">
+              <div class="thumbnail">
+                  <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+                  <div class="caption">
+                      <h4 class="group inner list-group-item-heading">
+                          这是一个很长很长很长很长很长很长的中文标题，你懂得。震惊！</h4>
+                      <p class="group inner list-group-item-text">
+                          这是一个很长很长很长很长很长很长的中文.这是一个很长很长很长很长很长很长的中文.这是一个很长很长很长很长很长很长的中文.这是一个很长很长很长很长很长很长的中文这是一个很长很长很长很长很长很长的中文这是一个很长很长很长很长很长很长的中文</p>
+                      <div class="row">
+                          <div class="col-xs-12 col-md-6">
+                              <p class="lead">
+                                  $21.000</p>
+                          </div>
+                          <div class="col-xs-12 col-md-6">
+                              <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="item  col-xs-4 col-lg-4">
+              <div class="thumbnail">
+                  <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+                  <div class="caption">
+                      <h4 class="group inner list-group-item-heading">
+                          Product title</h4>
+                      <p class="group inner list-group-item-text">
+                          Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                          sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                      <div class="row">
+                          <div class="col-xs-12 col-md-6">
+                              <p class="lead">
+                                  $21.000</p>
+                          </div>
+                          <div class="col-xs-12 col-md-6">
+                              <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="item  col-xs-4 col-lg-4">
+              <div class="thumbnail">
+                  <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+                  <div class="caption">
+                      <h4 class="group inner list-group-item-heading">
+                          Product title</h4>
+                      <p class="group inner list-group-item-text">
+                          Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                          sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                      <div class="row">
+                          <div class="col-xs-12 col-md-6">
+                              <p class="lead">
+                                  $21.000</p>
+                          </div>
+                          <div class="col-xs-12 col-md-6">
+                              <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="item  col-xs-4 col-lg-4">
+              <div class="thumbnail">
+                  <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+                  <div class="caption">
+                      <h4 class="group inner list-group-item-heading">
+                          Product title</h4>
+                      <p class="group inner list-group-item-text">
+                          Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                          sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                      <div class="row">
+                          <div class="col-xs-12 col-md-6">
+                              <p class="lead">
+                                  $21.000</p>
+                          </div>
+                          <div class="col-xs-12 col-md-6">
+                              <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+  <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>
+  <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/app/common/page-layout-init.js"></script>
+  <script type="text/javascript" src="/app/post/post-list.js"></script>
+</body>
+</html>

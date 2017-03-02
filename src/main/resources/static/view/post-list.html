@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/post/post-list.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <div class="container">
+      <ol class="breadcrumb">
+        <li><a href="/">首页</a></li>
+        <li class="active">类别文章列表</li>
+      </ol>
+      <div class="page-header">
+        <h3>文章列表：${category.name!}</h3>
+      </div>
+    </div>
+    <div class="container">
+      <div class="well well-sm">
+          <strong>显示模式</strong>
+          <div class="btn-group">
+              <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+              </span>列表</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                  class="glyphicon glyphicon-th"></span>表格</a>
+          </div>
+      </div>
+      <div id="products" class="row list-group row-icms">
+        <#if pages.content??>
+          <#list pages.content as post>
+          <div class="item  col-xs-4 col-lg-4">
+              <div class="thumbnail">
+                  <img class="group list-group-image" src="/images/image-blank-background.png" alt="" />
+                  <div class="caption">
+                      <h4 class="group inner list-group-item-heading"><a href="/post.html?pid=${post.pid}" target="_blank">${post.title!}</a></h4>
+                      <p class="group inner list-group-item-text">${post.introduction}</p>
+                      <div class="row">
+                          <div class="col-xs-12 col-md-6">
+                              <a class="btn btn-success" href="/post.html?pid=${post.pid}" target="_blank">查看详情</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </#list>
+        </#if>
+      </div>
+      <div class="footer-page">
+        <nav aria-label="...">
+          <ul class="pager">
+            <li class="<#if page==1>disabled</#if>">
+                <a  href="/post/list?cid=${cid}&page=${previous}">上一页</a>
+            </li>
+            <span>${page!}</span>/<span>${totalPage!}</span>
+            <li class="<#if page==totalPage>disabled</#if>"><a href="/post/list?cid=${cid}&page=${next}">下一页</a></li>
+          </ul>
+        </nav>
+      </div>
+  </div>
+
+  <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+  <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script> -->
+  <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/app/common/page-layout-init.js"></script>
+  <script type="text/javascript" src="/app/post/post-list.js"></script>
+</body>
+</html>

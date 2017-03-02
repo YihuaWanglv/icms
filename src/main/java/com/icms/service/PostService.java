@@ -5,18 +5,26 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import com.icms.mapper.PostMapper;
 import com.icms.model.Post;
 import com.icms.model.TemplateHome;
 import com.icms.model.TemplateItem;
+import com.icms.repository.PostRepository;
 import com.icms.service.remote.PostRemote;
 
 @Service
 public class PostService implements PostRemote {
 	
 	@Autowired PostMapper postMapper;
+	@Autowired PostRepository postRepository;
 
 	@Override
 	public Post getById(Integer id) {
@@ -77,6 +85,16 @@ public class PostService implements PostRemote {
 	@Override
 	public void delete(Integer pid) {
 		postMapper.deleteByPrimaryKey(pid);
+	}
+
+	@Override
+	public Page<Post> loadRecentPostsByPage(Integer cid, Integer page) {
+		Assert.notNull(page, "param[page] must not be null.");
+		Assert.notNull(cid, "param[cid] must not be null.");
+		Sort sort = new Sort(Direction.DESC, "created");
+		Pageable pageable = new PageRequest(page-1, 6, sort);
+		Page<Post> pages = postRepository.findByCid(cid, pageable);
+		return pages;
 	}
 
 }

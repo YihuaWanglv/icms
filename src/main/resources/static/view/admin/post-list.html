@@ -8,8 +8,13 @@
   </head>
   <body ng-app="post">
     <div id="header"></div>
-    <div class="nav-right-holder"></div>
+    
     <div class="container" ng-controller="PostListController">
+      <ol class="breadcrumb">
+        <li><a href="/view/admin/index.html" target="_self">后台管理首页</a></li>
+        <li><a href="/view/admin/category-list.html" target="_self">类别文章管理</a></li>
+        <li class="active">类别文章列表</li>
+      </ol>
       <div class="page-header">
         <h1>文章列表</h1>
       </div>

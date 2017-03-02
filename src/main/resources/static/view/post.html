@@ -11,18 +11,17 @@
 
   <div class="container">
     <ol class="breadcrumb">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Library</a></li>
-      <li class="active">Data</li>
+      <li><a href="/">首页</a></li>
+      <li><a href="/post/list?cid=${post.cid}">类别文章列表</a></li>
+      <li class="active">文章详情</li>
     </ol>
     <header class="post-header">
         <h3 class="post-title">${post.title!}</h3>
         <section class="post-meta">
-            <time class="post-date" datetime="${post.created?datetime}">${post.created?datetime}</time> 
+            <span>${category.name!}</span><span>|</span><time class="post-date" datetime="${post.created?datetime}">${post.created?datetime}</time> 
         </section>
     </header>
     <div class="container-content">
-      <img src="/images/post-test.png">
       ${post.content!}
     </div>
   </div>

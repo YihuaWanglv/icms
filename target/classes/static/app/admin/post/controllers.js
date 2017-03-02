@@ -1,5 +1,5 @@
 (function(angular) {
-  var PostController = function($scope, $http, Post, $location) {
+  var PostController = function($scope, $http, Post, $location, $sce) {
     $scope.location = $location;
     $scope.pid = ($location.search()).pid;
     $scope.cid = ($location.search()).cid;
@@ -9,6 +9,7 @@
     $scope.post = {title:'',content:''};
     console.log($scope.editting);
     console.log($scope.post);
+    console.log($scope.cid);
     if ($scope.command > 0) {
       Post.get({pid: $scope.pid}, function(response) {
         console.log(response);
@@ -23,9 +24,11 @@
         post.$update(function(post) {
           layer.msg('保存成功');
           if ($scope.command=2) {
-            window.location.href='/view/admin/post.html?command=1&pid='+$scope.pid;
+            $scope.changeButtonFlag();
+            // window.location.href='/view/admin/post.html?command=1&pid='+$scope.pid+'&cid='+$scope.cid;
           } else {
-            window.location.reload();
+            $scope.changeButtonFlag();
+            // window.location.reload();
           }
         });
       } else {
@@ -42,7 +45,7 @@
           $scope.pid=post.pid;
           $scope.post = post;
           layer.msg('保存成功');
-          window.location.href='/view/admin/post.html?command=1&pid='+$scope.pid;
+          window.location.href='/view/admin/post.html?command=1&pid='+$scope.pid+'&cid='+$scope.cid;
         });
       }
     };
@@ -51,9 +54,13 @@
         $scope.posts.splice($scope.posts.sdexOf(post), 1);
       });
     };
+    $scope.renderHtml = function (htmlCode) {
+        return $sce.trustAsHtml(htmlCode);
+    };
     
   };
 
-  PostController.$inject = ['$scope', '$http', 'Post', '$location'];
-  angular.module('post.controllers', ['ng.ueditor']).controller('PostController', PostController);
+  PostController.$inject = ['$scope', '$http', 'Post', '$location', '$sce'];
+  // angular.module('post.controllers', ['ng.ueditor']).controller('PostController', PostController);
+  angular.module('post.controllers').controller('PostController', PostController);
 }(angular));
