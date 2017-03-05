@@ -101,6 +101,16 @@
 			<version>1.3</version>
 		</dependency>
 		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
 		    <groupId>com.belerweb</groupId>
 		    <artifactId>pinyin4j</artifactId>
 		    <version>2.5.0</version>
@@ -110,9 +120,24 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency> -->
-
-
 	</dependencies>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env>dev</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>pro</id>
+			<properties>
+				<env>pro</env>
+			</properties>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>
@@ -142,18 +167,38 @@
 					</archive>
 				</configuration>
 			</plugin>
-
-			<!-- <plugin> <artifactId>maven-resources-plugin</artifactId> <executions> 
-				<execution> <id>copy-prod-resources</id> <phase>process-resources</phase> 
-				<goals> <goal>copy-resources</goal> </goals> <configuration> <overwrite>true</overwrite> 
-				<sourceDirectory>${basedir}/src/main/java</sourceDirectory> <outputDirectory>target/classes</outputDirectory> 
-				<resources> <resource> <directory>src/main/resources</directory> <includes> 
-				<include>*.properties</include> <include>*.xml</include> </includes> </resource> 
-				<resource> <directory>src/main/resources/${env}</directory> <targetPath></targetPath> 
-				</resource> </resources> <testSourceDirectory>${basedir}/src/test/java</testSourceDirectory> 
-				<testOutputDirectory>target/test-classes</testOutputDirectory> </configuration> 
-				</execution> </executions> </plugin> -->
-			<!-- -->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-prod-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<overwrite>true</overwrite>
+							<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+							<outputDirectory>target/classes</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources</directory>
+									<includes>
+										<include>*.properties</include>
+										<include>*.xml</include>
+									</includes>
+								</resource>
+								<resource>
+									<directory>src/main/resources/${env}</directory>
+									<targetPath></targetPath>
+								</resource>
+							</resources>
+							<testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
+							<testOutputDirectory>target/test-classes</testOutputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
