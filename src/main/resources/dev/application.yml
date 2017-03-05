@@ -27,7 +27,7 @@ shiro:
     "/user/create": anon
     "/user/**": authc
     "/view/admin/**": authc,roles[admin]
-    "/**": anon
+    "/**": authc
   enableShareJsession: true
   shareJsessionKey: SHAREJSESSIONID
   domain: .icms.com
