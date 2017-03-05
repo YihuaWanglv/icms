@@ -12,6 +12,7 @@ shiro:
     "/sign-up": anon
     "/css/**": anon
     "/static/**": anon
+    "/images/**": anon
     "/bower_components/**": anon
     "/app/**": anon
     "/lib/**": anon
@@ -27,7 +28,7 @@ shiro:
     "/user/create": anon
     "/user/**": authc
     "/view/admin/**": authc,roles[admin]
-    "/**": anon
+    "/**": authc
   enableShareJsession: true
   shareJsessionKey: SHAREJSESSIONID
   domain: .icms.com

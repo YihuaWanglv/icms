@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="promo-block">
-          <div class="promo-text"><a href="/post/list?cid=${item.categoryId!}">${item.name!}</a></div>
+          <div class="promo-text"><a target="_blank" href="/post/list?cid=${item.categoryId!}">${item.name!}</a></div>
             <div class="center-line"></div>
         </div>
       </div>
@@ -18,7 +18,7 @@
               <div class="testimonials-block">
                 <div class="testimonials-photo"><img src="/images/image-blank-background-small.png" alt="" height="125" width="125"></div>
                 <div class="testimonials-text">
-                  <div class="testimonials-name"><h4><a href="/post.html?pid=${post.pid}" target="_blank">${post.title!}</a></h4></div>
+                  <div class="testimonials-name"><h4><a href="/post?pid=${post.pid}" target="_blank">${post.title!}</a></h4></div>
                   <div class="testimonials-desc crop"><p>${post.introduction!}</p></div>
                 </div>
               </div>
